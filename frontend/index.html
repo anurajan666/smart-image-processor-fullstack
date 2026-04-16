@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Processor</title>
+</head>
+<body>
+    <h2>Upload Image</h2>
+    <input type="file" id="fileInput" />
+    <select id="operation">
+        <option value="grayscale">Grayscale</option>
+        <option value="blur">Blur</option>
+        <option value="edges">Edges</option>
+    </select>
+    <button onclick="upload()">Process</button>
+    <br><br>
+    <img id="result" width="300"/>
+
+<script>
+function upload() {
+    const file = document.getElementById("fileInput").files[0];
+    const operation = document.getElementById("operation").value;
+
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("operation", operation);
+
+    fetch("http://localhost:5000/process", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.blob())
+    .then(blob => {
+        document.getElementById("result").src = URL.createObjectURL(blob);
+    });
+}
+</script>
+</body>
+</html>
