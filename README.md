@@ -85,6 +85,8 @@ Select processing type
 Click Process
 View the processed image instantly
 
+
+
 📦 Future Improvements
 Convert frontend to React (Vite)
 Add drag & drop upload
